@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Base Route
 app.get("/", (req, res) => {
-  res.send(`Welcome to ${process.env.APP_NAME}`);
+  res.send(`Welcome to API Launchpad.`);
 });
 
 // Task 4: Add New Feature
