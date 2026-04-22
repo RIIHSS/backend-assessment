@@ -1,30 +1,30 @@
-require("dotenv").config();
 const express = require("express");
+const dotenv = require("dotenv");
+const userRoutes = require("./routes/userRoutes"); // Task 5
+
+dotenv.config();
+
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
-// TODO: Import routes
-// const userRoutes = require("./routes/userRoutes");
-
-// TODO: Use routes
-// app.use("/api/users", userRoutes);
-
-// Existing Route
+// Base Route
 app.get("/", (req, res) => {
-  res.send("🚀 API Launchpad is running...");
+  res.send(`Welcome to ${process.env.APP_NAME}`);
 });
 
-// TODO: Create a new route
-// Route: GET /api/status
-// Response:
-// {
-//   status: "success",
-//   message: "API is live and working"
-// }
+// Task 4: Add New Feature
+app.get("/api/status", (req, res) => {
+  res.json({
+    status: "success",
+    message: "API is live and working",
+  });
+});
 
-const PORT = process.env.PORT || 5000;
+// Task 5: Connect Routes
+app.use("/api/users", userRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

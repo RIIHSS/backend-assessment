@@ -1,16 +1,28 @@
 const express = require("express");
 const router = express.Router();
 
-// Existing Route
+// Sample data (usually exists in the starter repo)
+const users = [
+  { id: 1, name: "John Doe", email: "john@example.com" },
+  { id: 2, name: "Jane Smith", email: "jane@example.com" },
+  { id: 3, name: "Alice Johnson", email: "alice@example.com" }
+];
+
+// GET all users
 router.get("/", (req, res) => {
-  res.json([
-    { id: 1, name: "Alice" },
-    { id: 2, name: "Bob" }
-  ]);
+  res.json(users);
 });
 
-// TODO: Add a new route
-// Route: GET /api/users/:id
-// Return the user based on ID
+// Task 3: Implement GET /api/users/:id
+router.get("/:id", (req, res) => {
+  const userId = parseInt(req.params.id);
+  const user = users.find((u) => u.id === userId);
+
+  if (user) {
+    res.status(200).json(user);
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
 
 module.exports = router;
